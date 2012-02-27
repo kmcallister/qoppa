@@ -31,7 +31,7 @@
 (define (m-operate env operative operands)
     (operative env operands))
 
-(define (make-operative static-env vau-operands)
+(define (m-vau static-env vau-operands)
     (let ((params    (car   vau-operands))
           (env-param (cadr  vau-operands))
           (body      (caddr vau-operands)))
@@ -51,7 +51,7 @@
             (apply (cadr pair)
                 (map (lambda (exp) (m-eval env exp)) operands)))))
     (cons
-        (list 'vau make-operative)
+        (list 'vau m-vau)
         (map wrap-prim (list
             (list 'lookup   m-lookup)
             (list 'eval     m-eval)
