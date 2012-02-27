@@ -46,13 +46,13 @@
                 body))))
 
 (define (make-global-frame)
-    (define (wrap-prim pair)
+    (define (wrap-primitive pair)
         (list (car pair) (lambda (env operands)
             (apply (cadr pair)
                 (map (lambda (exp) (m-eval env exp)) operands)))))
     (cons
         (list 'vau m-vau)
-        (map wrap-prim (list
+        (map wrap-primitive (list
             (list 'lookup   m-lookup)
             (list 'eval     m-eval)
             (list 'operate  m-operate)
